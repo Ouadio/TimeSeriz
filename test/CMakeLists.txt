@@ -1,8 +1,9 @@
 add_executable(test1 myTest.cpp)
-
-target_link_libraries(test1 gtest gmock)
+target_link_libraries(test1 gmock_main)
 
 target_link_libraries(test1 TSclass)
+target_link_libraries(test1 SmoothClass)
+
 
 add_test(NAME test1 COMMAND test1)
 

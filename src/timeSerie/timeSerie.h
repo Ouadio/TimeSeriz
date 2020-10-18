@@ -16,6 +16,8 @@ public:
 	//Constructors
 	TimeSerie();
 	TimeSerie(std::vector<T>, std::vector<long int>, std::string);
+	TimeSerie(std::vector<T>, std::string);
+	TimeSerie(std::vector<T>);
 	TimeSerie(int, std::string);
 	TimeSerie(int);
 
