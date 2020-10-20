@@ -1,34 +1,11 @@
-# Download and unpack googletest at configure time
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
+add_executable(initTest myTest.cpp)
 
-# Prevent overriding the parent project's compiler/linker
-# settings on Windows
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+target_link_libraries(initTest gmock_main)
 
-# Add googletest directly to our build. This defines
-# the gtest and gtest_main targets.
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
-                 ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
-                 EXCLUDE_FROM_ALL)
+target_link_libraries(initTest TSclass)
+target_link_libraries(initTest SmoothClass)
 
+add_test(NAME initTest COMMAND initTest)
 
-# Now simply link against gtest or gtest_main as needed. Eg
-add_executable(test1 myTest.cpp)
-target_link_libraries(test1 gtest gtest_main gmock)
-target_link_libraries(test1 TSclass)
-add_test(NAME test1 COMMAND test1)
-
-target_include_directories(test1 PUBLIC "${PROJECT_BINARY_DIR}")
+target_include_directories(initTest PUBLIC "${PROJECT_BINARY_DIR}")
 
