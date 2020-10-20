@@ -3,7 +3,9 @@
 #include <vector>
 #include <string>
 
-template<typename T> class TimeSerie {
+template <typename T>
+class TimeSerie
+{
 private:
 	std::vector<T> values;
 	std::vector<long int> timeStamp;
@@ -36,6 +38,4 @@ public:
 	void setUnit(std::string);
 
 	~TimeSerie();
-
 };
-
